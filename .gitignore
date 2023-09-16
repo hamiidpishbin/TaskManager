@@ -1,0 +1,12 @@
+.idea/
+.vs/
+.editorconfig/
+global.json
+Web/bin
+Web/obj
+Infrastructure/bin
+Infrastructure/obj
+Domain/bin
+Domain/obj
+Application/bin
+Application/obj
