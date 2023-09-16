@@ -1,7 +1,8 @@
 using Domain.Entity;
 using Domain.Interface;
+using Domain.Model.Task;
 using Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
+using Infrastructure.Mapping;
 using Task = System.Threading.Tasks.Task;
 
 namespace Web.Services;
@@ -15,6 +16,12 @@ public class TaskService : ITaskService
   {
     _sprintService = sprintService;
     _context = context;
+  }
+
+  public async Task AddTask(AddTaskDto addTaskDto)
+  {
+    _context.Tasks.Add(addTaskDto.ToEntity());
+    await _context.SaveChangesAsync();
   }
   
   public async Task<List<Domain.Entity.Task>> GetCurrentSprintTasks()

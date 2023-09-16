@@ -1,8 +1,5 @@
 using System.Reflection;
-using Application.Interfaces;
-using Application.Models;
 using Domain.Entity;
-using Domain.Interface;
 using Infrastructure.Identity;
 using Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -24,6 +21,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {
     optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
+    optionsBuilder.AddInterceptors(new StatusInterceptor());
     base.OnConfiguring(optionsBuilder);
   }
   

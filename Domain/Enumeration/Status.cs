@@ -6,4 +6,5 @@ public enum Status : byte
   Active = 2,
   Pending = 3,
   Closed = 4,
+  Removed = 5,
 }
