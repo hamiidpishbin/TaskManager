@@ -22,6 +22,7 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
   {
     optionsBuilder.AddInterceptors(new SoftDeleteInterceptor());
     optionsBuilder.AddInterceptors(new StatusInterceptor());
+    optionsBuilder.AddInterceptors(new AutoDateTimeUpdateInterceptor());
     base.OnConfiguring(optionsBuilder);
   }
   

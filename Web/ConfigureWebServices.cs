@@ -1,6 +1,5 @@
 ﻿using System.Text;
 using Application.Interfaces;
-using Application.Models;
 using Domain.Interface;
 using Infrastructure.Data;
 using Infrastructure.Identity;
@@ -18,6 +17,7 @@ public static class ConfigureWebServices
     services.AddScoped<IIdentityService, IdentityService>();
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<ISprintService, SprintService>();
+    services.AddScoped<ITaskService, TaskService>();
 
     services.AddCors(options =>
     {

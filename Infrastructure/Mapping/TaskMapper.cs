@@ -10,8 +10,6 @@ public static class TaskMapper
     return new Task()
     {
       Title = addTaskDto.Title,
-      Start = addTaskDto.Start,
-      End = addTaskDto.End,
       SprintId = addTaskDto.SprintId,
     };
   }
