@@ -1,4 +1,3 @@
-using Domain.Entity;
 using Domain.Interface;
 using Domain.Model.Task;
 using Infrastructure.Data;
@@ -27,7 +26,6 @@ public class TaskService : ITaskService
   public async Task<List<Domain.Entity.Task>> GetCurrentSprintTasks()
   {
     var currentSprint = await _sprintService.GetCurrentSprint();
-    
-    return await Task.Run(() => _context.Tasks.Where(t => t.Id == currentSprint.Id).ToList());
+    return _context.Tasks.Where(t => t.Id == currentSprint.Id).ToList();
   }
 }

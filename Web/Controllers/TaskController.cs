@@ -1,6 +1,5 @@
 using Domain.Interface;
 using Domain.Model.Task;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 
@@ -8,14 +7,10 @@ namespace Web.Controllers;
 
 public class TaskController : BaseApiController
 {
-  private readonly ISprintService _sprintService;
-  private readonly ApplicationDbContext _context;
   private readonly ITaskService _taskService;
 
-  public TaskController(ISprintService sprintService, ApplicationDbContext context, ITaskService taskService)
+  public TaskController(ITaskService taskService)
   {
-    _sprintService = sprintService;
-    _context = context;
     _taskService = taskService;
   }
 
@@ -28,8 +23,7 @@ public class TaskController : BaseApiController
   [HttpGet("GetCurrentSprintTasks")]
   public async Task<ActionResult<List<Domain.Entity.Task>>> GetCurrentSprintTasks()
   {
-    var currentSprint = await _sprintService.GetCurrentSprint();
-    var result = _context.Tasks.Where(task => task.Id == currentSprint.Id).ToList();
+    var result = await _taskService.GetCurrentSprintTasks();
     return Ok(result);
   }
 }
