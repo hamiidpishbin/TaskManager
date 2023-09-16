@@ -5,6 +5,6 @@ namespace Domain.Entity;
 
 public class Sprint : TitledDateTimeRangeEntity, ISoftDelete
 {
-  public IEnumerable<Task>? Tasks { get; set; }
+  public ICollection<Task>? Tasks { get; } = new List<Task>();
   public bool IsDeleted { get; set; }
 }

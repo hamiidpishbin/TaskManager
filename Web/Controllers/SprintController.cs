@@ -1,12 +1,8 @@
-using Application.Interfaces;
-using Application.Models;
 using Domain.Entity;
 using Domain.Interface;
 using Domain.Model.Sprint;
-using Domain.Models.Sprint;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Web.Base;
 
 namespace Web.Controllers;
@@ -22,16 +18,16 @@ public class SprintController : BaseApiController
     _sprintService = sprintService;
   }
 
-  [HttpGet]
-  public IActionResult Get()
+  [HttpGet("GetSprints")]
+  public IActionResult GetSprints()
   {
     return Ok(_context.Sprints.ToList());
   }
 
-  [HttpPost]
-  public async Task<IActionResult> Add(SprintSaveDateTimeRangeDto sprintSaveDateTimeRangeDto)
+  [HttpPost("AddSprint")]
+  public async Task<IActionResult> AddSprint(AddSprintDto sprintDto)
   {
-    await _sprintService.AddNewSprint(sprintSaveDateTimeRangeDto);
+    await _sprintService.AddSprint(sprintDto);
     return Ok();
   }
 

@@ -6,6 +6,6 @@ namespace Domain.Interface;
 
 public interface ISprintService
 {
-    Task AddNewSprint(SprintSaveDateTimeRangeDto sprintSaveDateTimeRangeDto);
     Task<Sprint> GetCurrentSprint();
+    Task AddSprint(AddSprintDto addSprintDto);
 }

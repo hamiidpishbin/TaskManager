@@ -16,7 +16,7 @@ public class AccountController : BaseApiController
 		_identityService = identityService;
 	}
 
-	[HttpPost("login")]
+	[HttpPost("Login")]
 	public async Task<IActionResult> Login(LoginDto loginDto)
 	{
 		var result = await _identityService.LoginAsync(loginDto);

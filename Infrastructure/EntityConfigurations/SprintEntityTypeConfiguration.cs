@@ -10,6 +10,7 @@ public class SprintEntityTypeConfiguration : IEntityTypeConfiguration<Sprint>
   public void Configure(EntityTypeBuilder<Sprint> builder)
   {
     builder
+      .HasQueryFilter(e => e.IsDeleted == false)
       .HasMany(e => e.Tasks)
       .WithOne(e => e.Sprint)
       .HasForeignKey(e => e.SprintId)

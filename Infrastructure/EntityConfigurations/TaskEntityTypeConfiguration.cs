@@ -8,6 +8,6 @@ public class TaskEntityTypeConfiguration : IEntityTypeConfiguration<Task>
 {
   public void Configure(EntityTypeBuilder<Task> builder)
   {
-    //throw new NotImplementedException();
+    builder.HasQueryFilter(x => x.IsDeleted == false);
   }
 }

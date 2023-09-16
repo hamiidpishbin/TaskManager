@@ -1,6 +1,6 @@
 using Domain.Entity;
 
-namespace Domain.Models.Sprint;
+namespace Domain.Model.Sprint;
 
 public class SprintDto
 {

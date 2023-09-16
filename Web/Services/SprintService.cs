@@ -16,9 +16,9 @@ public class SprintService : ISprintService
     _context = context;
   }
 
-  public async Task AddNewSprint(SprintSaveDateTimeRangeDto sprintSaveDateTimeRangeDto)
+  public async Task AddSprint(AddSprintDto addSprintDto)
   {
-    _context.Sprints.Add(sprintSaveDateTimeRangeDto.ToEntity());
+    _context.Sprints.Add(addSprintDto.ToEntity());
     await _context.SaveChangesAsync();
   }
 
