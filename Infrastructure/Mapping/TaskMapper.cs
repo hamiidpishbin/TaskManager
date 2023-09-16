@@ -12,6 +12,7 @@ public static class TaskMapper
       Title = addTaskDto.Title,
       Start = addTaskDto.Start,
       End = addTaskDto.End,
+      SprintId = addTaskDto.SprintId,
     };
   }
 }
