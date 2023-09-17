@@ -1,5 +1,6 @@
 using Domain.Entity;
 using Domain.Interface;
+using Domain.Interface.Infrastructure;
 using Domain.Model.Sprint;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -9,10 +10,10 @@ namespace Web.Controllers;
 
 public class SprintController : BaseApiController
 {
-  private readonly ApplicationDbContext _context;
+  private readonly IApplicationDbContext _context;
   private readonly ISprintService _sprintService;
 
-  public SprintController(ApplicationDbContext context, ISprintService sprintService)
+  public SprintController(IApplicationDbContext context, ISprintService sprintService)
   {
     _context = context;
     _sprintService = sprintService;

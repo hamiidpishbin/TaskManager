@@ -1,5 +1,6 @@
 using Domain.Entity;
 using Domain.Interface;
+using Domain.Interface.Infrastructure;
 using Domain.Model.Sprint;
 using Infrastructure.Data;
 using Infrastructure.Mapping;
@@ -9,9 +10,9 @@ namespace Web.Services;
 
 public class SprintService : ISprintService
 {
-  private readonly ApplicationDbContext _context;
+  private readonly IApplicationDbContext _context;
 
-  public SprintService(ApplicationDbContext context)
+  public SprintService(IApplicationDbContext context)
   {
     _context = context;
   }

@@ -1,5 +1,6 @@
 using System.Reflection;
 using Domain.Entity;
+using Domain.Interface.Infrastructure;
 using Infrastructure.Identity;
 using Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -8,7 +9,7 @@ using Task = Domain.Entity.Task;
 
 namespace Infrastructure.Data;
 
-public class ApplicationDbContext : IdentityDbContext<AppUser>
+public class ApplicationDbContext : IdentityDbContext<AppUser>, IApplicationDbContext
 {
   public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
   {
@@ -17,6 +18,11 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
   public DbSet<Sprint> Sprints => Set<Sprint>();
   public DbSet<Issue> Issues => Set<Issue>();
   public DbSet<Task> Tasks => Set<Task>();
+
+  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+  {
+    return await base.SaveChangesAsync(cancellationToken);
+  }
 
   protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
   {

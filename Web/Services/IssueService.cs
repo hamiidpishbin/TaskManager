@@ -1,15 +1,16 @@
 using Application.Interfaces;
 using Domain.Entity;
 using Domain.Interface;
+using Domain.Interface.Infrastructure;
 using Infrastructure.Data;
 
 namespace Web.Services;
 
 public class IssueService : IIssueService
 {
-    private readonly ApplicationDbContext _dbContext;
+    private readonly IApplicationDbContext _dbContext;
 
-    public IssueService(ApplicationDbContext dbContext)
+    public IssueService(IApplicationDbContext dbContext)
     {
         _dbContext = dbContext;
     }

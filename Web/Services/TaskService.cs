@@ -1,4 +1,5 @@
 using Domain.Interface;
+using Domain.Interface.Infrastructure;
 using Domain.Model.Task;
 using Infrastructure.Data;
 using Infrastructure.Mapping;
@@ -9,9 +10,9 @@ namespace Web.Services;
 public class TaskService : ITaskService
 {
   private readonly ISprintService _sprintService;
-  private readonly ApplicationDbContext _context;
+  private readonly IApplicationDbContext _context;
 
-  public TaskService(ISprintService sprintService, ApplicationDbContext context)
+  public TaskService(ISprintService sprintService, IApplicationDbContext context)
   {
     _sprintService = sprintService;
     _context = context;
