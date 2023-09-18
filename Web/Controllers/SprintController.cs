@@ -1,3 +1,4 @@
+using Application.Sprints.Queries;
 using Domain.Entity;
 using Domain.Interface;
 using Domain.Interface.Infrastructure;
@@ -23,6 +24,12 @@ public class SprintController : BaseApiController
   public IActionResult GetSprints()
   {
     return Ok(_context.Sprints.ToList());
+  }
+  
+  [HttpGet("GetSprintsNew")]
+  public async Task<ActionResult<IEnumerable<SprintDto>>> GetSprintsNew()
+  {
+    return Ok(await Mediator.Send(new GetSprintsQuery()));
   }
 
   [HttpPost("AddSprint")]

@@ -1,4 +1,6 @@
+using System.Net;
 using Application.Models;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Base;
@@ -7,6 +9,10 @@ namespace Web.Base;
 [ApiController]
 public class BaseApiController : ControllerBase
 {
+	private ISender? _mediator;
+
+	protected ISender Mediator => _mediator ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+    
 	protected IActionResult HandleResult<T>(Result<T> result)
 	{
 		return result.Succeeded switch

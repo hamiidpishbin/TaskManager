@@ -1,6 +1,8 @@
 ﻿using System.Text;
 using Application.Interfaces;
+using Application.Sprints.Queries;
 using Domain.Interface;
+using Domain.Interface.Infrastructure;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -14,6 +16,7 @@ public static class ConfigureWebServices
 {
   public static IServiceCollection AddWebServices(this IServiceCollection services, IConfiguration config)
   {
+    services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
     services.AddScoped<IIdentityService, IdentityService>();
     services.AddScoped<ITokenService, TokenService>();
     services.AddScoped<ISprintService, SprintService>();
@@ -24,6 +27,8 @@ public static class ConfigureWebServices
       options.AddPolicy("CorsPolicy",
         policyBuilder => { policyBuilder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"); });
     });
+
+    services.AddMediatR(conf => conf.RegisterServicesFromAssembly(typeof(GetSprintsQuery).Assembly));
 
     services.AddIdentityCore<AppUser>()
       .AddEntityFrameworkStores<ApplicationDbContext>()

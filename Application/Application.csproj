@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Domain\Domain.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Common\Exceptions\" />
+      <Folder Include="Common\Interfaces\" />
+      <Folder Include="Common\Models\" />
+      <Folder Include="Sprints\Commands\" />
+      <Folder Include="Tasks\Commands\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="MediatR" Version="12.1.1" />
+    </ItemGroup>
+
+</Project>
