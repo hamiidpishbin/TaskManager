@@ -1,8 +1,10 @@
+using Application.Account.Commands.CreateAccount;
 using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Interfaces.Web;
 using Application.Common.Models;
 using Application.Models;
 using Domain.Constants;
+using Domain.Enums.Results;
 using Domain.Interfaces;
 using Domain.Models.Account;
 using Infrastructure.Mappings;
@@ -13,9 +15,9 @@ namespace Infrastructure.Identity;
 
 public class IdentityService : IIdentityService
 {
-  private readonly UserManager<AppUser> _userManager;
-  private readonly ITokenService _tokenService;
   private readonly SignInManager<AppUser> _signInManager;
+  private readonly ITokenService _tokenService;
+  private readonly UserManager<AppUser> _userManager;
 
   public IdentityService(UserManager<AppUser> userManager, ITokenService tokenService,
     SignInManager<AppUser> signInManager)
@@ -41,33 +43,38 @@ public class IdentityService : IIdentityService
       : Result<UserDto>.Failure(IdentityFailureReasons.Unauthorized);
   }
 
-  public async Task<Result<UserDto>> CreateUserAsync(SignupDto signupDto)
+  public async Task<Result<AccountResult>> CreateUserAsync(CreateAccountCommand request)
   {
-    var userNameIsTaken = await _userManager.Users.AnyAsync(user => user.UserName == signupDto.UserName);
-    var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == signupDto.Email);
+    var userNameIsTaken = await _userManager.Users.AnyAsync(user => user.UserName == request.UserName);
+    var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == request.Email);
 
     if (userNameIsTaken)
     {
-      return Result<UserDto>.Failure(IdentityFailureReasons.UsernameTaken);
+      return Result<AccountResult>.Failure(GetEnumString(AccountResult.UserNameIsTaken));
     }
 
     if (emailIsTaken)
     {
-      return Result<UserDto>.Failure(IdentityFailureReasons.EmailTaken);
+      return Result<AccountResult>.Failure(GetEnumString(AccountResult.EmailIsTaken));
     }
 
     var user = new AppUser
     {
-      UserName = signupDto.UserName,
-      Email = signupDto.Email,
-      DisplayName = signupDto.DisplayName
+      UserName = request.UserName,
+      Email = request.Email,
+      DisplayName = request.DisplayName
     };
 
-    var createdUser = await _userManager.CreateAsync(user, signupDto.Password);
+    var createdUser = await _userManager.CreateAsync(user, request.Password);
 
     return createdUser is not { Succeeded: true }
-      ? Result<UserDto>.Failure(IdentityFailureReasons.UnknownError)
-      : Result<UserDto>.Success(GetUserDto(user));
+      ? Result<AccountResult>.Failure(IdentityFailureReasons.UnknownError)
+      : Result<AccountResult>.Success(AccountResult.Done);
+  }
+
+  private string GetEnumString(Enum enumeration)
+  {
+    return Enum.GetName(enumeration.GetType(), enumeration)!;
   }
 
   private UserDto GetUserDto(AppUser user)

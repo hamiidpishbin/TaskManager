@@ -7,6 +7,10 @@
         <RootNamespace>Web</RootNamespace>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <PlatformTarget>ARM64</PlatformTarget>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="MediatR" Version="12.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.20" />

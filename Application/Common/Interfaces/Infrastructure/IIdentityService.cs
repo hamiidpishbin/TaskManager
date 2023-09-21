@@ -1,11 +1,12 @@
+using Application.Account.Commands.CreateAccount;
 using Application.Common.Models;
-using Application.Models;
+using Domain.Enums.Results;
 using Domain.Models.Account;
 
 namespace Application.Common.Interfaces.Infrastructure;
 
 public interface IIdentityService
-{ 
-    Task<Result<UserDto>> CreateUserAsync(SignupDto signupDto);
-    Task<Result<UserDto>> LoginAsync(LoginDto loginDto);
+{
+  Task<Result<AccountResult>> CreateUserAsync(CreateAccountCommand request);
+  Task<Result<UserDto>> LoginAsync(LoginDto loginDto);
 }

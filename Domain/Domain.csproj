@@ -6,6 +6,10 @@
         <Nullable>enable</Nullable>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <PlatformTarget>ARM64</PlatformTarget>
+    </PropertyGroup>
+
     <ItemGroup>
       <None Remove="Enums\" />
     </ItemGroup>

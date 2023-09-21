@@ -7,6 +7,10 @@
         <RootNamespace>Infrastructure</RootNamespace>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+        <PlatformTarget>ARM64</PlatformTarget>
+    </PropertyGroup>
+
     <ItemGroup>
       <PackageReference Include="Ardalis.GuardClauses" Version="4.0.1" />
       <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
