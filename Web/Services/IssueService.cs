@@ -1,7 +1,7 @@
-using Application.Interfaces;
-using Domain.Entity;
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
+using Domain.Entities;
 using Domain.Interface;
-using Domain.Interface.Infrastructure;
 using Infrastructure.Data;
 
 namespace Web.Services;

@@ -1,4 +1,4 @@
-using Application.Interfaces;
+using Application.Common.Interfaces.Infrastructure;
 using Domain.Models.Account;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;

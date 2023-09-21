@@ -1,8 +1,10 @@
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
+using Application.Common.Mappings;
 using Domain.Interface;
-using Domain.Interface.Infrastructure;
 using Domain.Model.Task;
 using Infrastructure.Data;
-using Infrastructure.Mapping;
+using Infrastructure.Mappings;
 using Task = System.Threading.Tasks.Task;
 
 namespace Web.Services;
@@ -24,7 +26,7 @@ public class TaskService : ITaskService
     await _context.SaveChangesAsync();
   }
   
-  public async Task<List<Domain.Entity.Task>> GetCurrentSprintTasks()
+  public async Task<List<Domain.Entities.Task>> GetCurrentSprintTasks()
   {
     var currentSprint = await _sprintService.GetCurrentSprint();
     return _context.Tasks.Where(t => t.Id == currentSprint.Id).ToList();

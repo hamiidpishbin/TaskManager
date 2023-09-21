@@ -1,8 +1,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Application.Interfaces;
+using Application.Common.Interfaces.Web;
 using Application.Models;
+using Domain.Interfaces;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Web.Services;

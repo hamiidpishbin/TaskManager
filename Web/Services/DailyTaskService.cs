@@ -1,3 +1,4 @@
+using Application.Common.Interfaces.Web;
 using Domain.Interface;
 
 namespace Web.Services;

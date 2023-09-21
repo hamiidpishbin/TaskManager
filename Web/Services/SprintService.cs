@@ -1,9 +1,7 @@
-using Domain.Entity;
-using Domain.Interface;
-using Domain.Interface.Infrastructure;
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
+using Domain.Entities;
 using Domain.Model.Sprint;
-using Infrastructure.Data;
-using Infrastructure.Mapping;
 using Task = System.Threading.Tasks.Task;
 
 namespace Web.Services;
@@ -19,8 +17,8 @@ public class SprintService : ISprintService
 
   public async Task AddSprint(AddSprintDto addSprintDto)
   {
-    _context.Sprints.Add(addSprintDto.ToEntity());
-    await _context.SaveChangesAsync();
+    // _context.Sprints.Add(addSprintDto.ToEntity());
+    // await _context.SaveChangesAsync();
   }
 
   public async Task<Sprint> GetCurrentSprint()

@@ -1,11 +1,11 @@
 using System.Reflection;
-using Domain.Entity;
-using Domain.Interface.Infrastructure;
+using Application.Common.Interfaces.Infrastructure;
+using Domain.Entities;
 using Infrastructure.Identity;
 using Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Task = Domain.Entity.Task;
+using Task = Domain.Entities.Task;
 
 namespace Infrastructure.Data;
 

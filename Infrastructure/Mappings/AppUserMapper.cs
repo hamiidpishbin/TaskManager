@@ -1,7 +1,7 @@
 using Application.Models;
 using Infrastructure.Identity;
 
-namespace Infrastructure.Mapping;
+namespace Infrastructure.Mappings;
 
 public static class AppUserMapper
 {

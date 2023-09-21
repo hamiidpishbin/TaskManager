@@ -1,3 +1,4 @@
+using Application.Common.Interfaces.Web;
 using Domain.Interface;
 using Domain.Model.Task;
 using Microsoft.AspNetCore.Mvc;
@@ -21,7 +22,7 @@ public class TaskController : BaseApiController
   }
   
   [HttpGet("GetCurrentSprintTasks")]
-  public async Task<ActionResult<List<Domain.Entity.Task>>> GetCurrentSprintTasks()
+  public async Task<ActionResult<List<Domain.Entities.Task>>> GetCurrentSprintTasks()
   {
     var result = await _taskService.GetCurrentSprintTasks();
     return Ok(result);

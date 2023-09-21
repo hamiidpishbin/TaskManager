@@ -1,8 +1,9 @@
 ﻿using System.Text;
-using Application.Interfaces;
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
 using Application.Sprints.Queries;
 using Domain.Interface;
-using Domain.Interface.Infrastructure;
+using Domain.Interfaces;
 using Infrastructure.Data;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Authentication.JwtBearer;

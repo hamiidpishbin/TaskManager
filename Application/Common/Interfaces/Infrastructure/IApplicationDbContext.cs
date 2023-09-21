@@ -1,8 +1,8 @@
-using Domain.Entity;
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
-using Task = Domain.Entity.Task;
+using Task = Domain.Entities.Task;
 
-namespace Domain.Interface.Infrastructure;
+namespace Application.Common.Interfaces.Infrastructure;
 
 public interface IApplicationDbContext
 {

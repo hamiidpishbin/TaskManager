@@ -1,11 +1,13 @@
-using Domain.Base;
-using Domain.Enumeration;
+using Application.Common.Interfaces.Web;
+using Domain.Common;
+using Domain.Enums;
 using Domain.Interface;
 
-namespace Domain.Entity;
+namespace Domain.Entities;
 
-public class Task : TitledEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
+public class Task : BaseEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
 {
+  public string Title { get; set; }
   public Status Status { get; set; }
   public bool IsDeleted { get; set; }
   public Guid SprintId { get; set; }

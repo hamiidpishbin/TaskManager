@@ -1,8 +1,11 @@
-using Application.Interfaces;
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
+using Application.Common.Models;
 using Application.Models;
 using Domain.Constants;
+using Domain.Interfaces;
 using Domain.Models.Account;
-using Infrastructure.Mapping;
+using Infrastructure.Mappings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

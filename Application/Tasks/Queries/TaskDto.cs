@@ -1,5 +1,5 @@
-using Domain.Entity;
-using Domain.Enumeration;
+using Domain.Entities;
+using Domain.Enums;
 using Domain.Model.Base;
 
 namespace Application.Tasks.Queries;

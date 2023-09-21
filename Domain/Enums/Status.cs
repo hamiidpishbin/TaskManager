@@ -1,4 +1,4 @@
-namespace Domain.Enumeration;
+namespace Domain.Enums;
 
 public enum Status : byte
 {

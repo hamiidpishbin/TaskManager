@@ -1,5 +1,5 @@
+using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Mappings;
-using Domain.Interface.Infrastructure;
 using Domain.Model.Sprint;
 using MediatR;
 using Microsoft.EntityFrameworkCore;

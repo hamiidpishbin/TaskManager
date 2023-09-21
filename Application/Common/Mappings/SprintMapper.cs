@@ -1,5 +1,5 @@
 using Application.Sprints.Queries;
-using Domain.Entity;
+using Domain.Entities;
 using Domain.Model.Sprint;
 
 namespace Application.Common.Mappings;
@@ -20,5 +20,15 @@ public static class SprintMapper
   public static IEnumerable<SprintDto> ToDto(this IEnumerable<Sprint> sprints)
   {
     return sprints.Select(sprint => sprint.ToDto());
+  }
+  
+  public static Sprint ToEntity(this AddSprintDto addSprintDto)
+  {
+    return new Sprint()
+    {
+      Title = addSprintDto.Title,
+      Start = addSprintDto.Start,
+      End = addSprintDto.End
+    };
   }
 }

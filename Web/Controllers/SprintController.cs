@@ -1,7 +1,8 @@
+using Application.Common.Interfaces.Infrastructure;
+using Application.Common.Interfaces.Web;
 using Application.Sprints.Queries;
-using Domain.Entity;
+using Domain.Entities;
 using Domain.Interface;
-using Domain.Interface.Infrastructure;
 using Domain.Model.Sprint;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
