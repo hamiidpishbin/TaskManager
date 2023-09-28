@@ -25,7 +25,7 @@ public class CreateAccountCommandHandler : IRequestHandler<CreateAccountCommand,
   public async Task<Result<AccountResult>> Handle(CreateAccountCommand request, CancellationToken cancellationToken)
   {
     var validator = new CreateAccountCommandValidator();
-    var validationResult = validator.Validate(request);
+    var validationResult = await validator.ValidateAsync(request, CancellationToken.None);
     if (!validationResult.IsValid)
     {
       return Result<AccountResult>.Failure(validationResult.ToString());

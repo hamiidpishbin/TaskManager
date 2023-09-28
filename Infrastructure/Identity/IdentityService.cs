@@ -1,4 +1,5 @@
 using Application.Account.Commands.CreateAccount;
+using Application.Account.Queries.Login;
 using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Interfaces.Web;
 using Application.Common.Models;
@@ -27,16 +28,16 @@ public class IdentityService : IIdentityService
     _signInManager = signInManager;
   }
 
-  public async Task<Result<UserDto>> LoginAsync(LoginDto loginDto)
+  public async Task<Result<UserDto>> LoginAsync(LoginQuery loginQuery)
   {
-    var user = await _userManager.FindByEmailAsync(loginDto.Email);
+    var user = await _userManager.FindByEmailAsync(loginQuery.Email);
 
     if (user == null)
     {
       return Result<UserDto>.Failure(IdentityFailureReasons.Unauthorized);
     }
 
-    var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
+    var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginQuery.Password, false);
 
     return signInResult.Succeeded
       ? Result<UserDto>.Success(GetUserDto(user))

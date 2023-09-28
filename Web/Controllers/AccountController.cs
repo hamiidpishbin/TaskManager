@@ -1,4 +1,5 @@
 using Application.Account.Commands.CreateAccount;
+using Application.Account.Queries.Login;
 using Application.Common.Interfaces.Infrastructure;
 using Domain.Models.Account;
 using Microsoft.AspNetCore.Authorization;
@@ -18,9 +19,9 @@ public class AccountController : BaseApiController
   }
 
   [HttpPost("Login")]
-  public async Task<IActionResult> Login(LoginDto loginDto)
+  public async Task<IActionResult> Login(LoginQuery loginQuery)
   {
-    var result = await _identityService.LoginAsync(loginDto);
+    var result = await Mediator.Send(loginQuery);
     return HandleResult(result);
   }
 

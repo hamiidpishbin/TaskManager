@@ -15,7 +15,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Account\Queries\"/>
       <Folder Include="Common\Exceptions\" />
       <Folder Include="Sprints\Commands\" />
       <Folder Include="Tasks\Commands\" />
