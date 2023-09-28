@@ -1,14 +1,13 @@
 using Application.Common.Interfaces.Infrastructure;
-using Application.Common.Models;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Sprint.Queries;
 
-public record GetCurrentSprintQuery : IRequest<Result<SprintDto>>;
+public record GetCurrentSprintQuery : IRequest<Domain.Entities.Sprint>;
 
 public class
-  GetCurrentSprintQueryHandler : IRequestHandler<GetCurrentSprintQuery, Result<SprintDto>>
+  GetCurrentSprintQueryHandler : IRequestHandler<GetCurrentSprintQuery, Domain.Entities.Sprint>
 {
   private readonly IApplicationDbContext _context;
 
@@ -17,13 +16,10 @@ public class
     _context = context;
   }
 
-  public async Task<Result<SprintDto>> Handle(GetCurrentSprintQuery request,
+  public async Task<Domain.Entities.Sprint> Handle(GetCurrentSprintQuery request,
     CancellationToken cancellationToken)
   {
-    var result = await _context.Sprints.FirstOrDefaultAsync(
-      s => s.Start >= DateTime.Now && s.End <= DateTime.Now, CancellationToken.None);
-    return result is null
-      ? Result<SprintDto>.Success(new SprintDto())
-      : Result<SprintDto>.Success(result.ToDto());
+    return (await _context.Sprints.FirstOrDefaultAsync(
+      s => s.Start >= DateTime.Now && s.End <= DateTime.Now, CancellationToken.None))!;
   }
 }

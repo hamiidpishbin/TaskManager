@@ -1,7 +1,5 @@
-using Application.Common.Interfaces.Web;
 using Application.Task.Commands.Add;
-using Domain.Interface;
-using Domain.Model.Task;
+using Application.Task.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 
@@ -9,13 +7,6 @@ namespace Web.Controllers;
 
 public class TaskController : BaseApiController
 {
-  private readonly ITaskService _taskService;
-
-  public TaskController(ITaskService taskService)
-  {
-    _taskService = taskService;
-  }
-
   [HttpPost("AddTask")]
   public async Task<IActionResult> AddTask(AddTaskCommand addTaskCommand)
   {
@@ -24,9 +15,9 @@ public class TaskController : BaseApiController
   }
 
   [HttpGet("GetCurrentSprintTasks")]
-  public async Task<ActionResult<List<Domain.Entities.UserTask>>> GetCurrentSprintTasks()
+  public async Task<IActionResult> GetCurrentSprintTasks()
   {
-    var result = await _taskService.GetCurrentSprintTasks();
-    return Ok(result);
+    var result = await Mediator.Send(new GetCurrentSprintTasksQuery());
+    return HandleResult(result);
   }
 }

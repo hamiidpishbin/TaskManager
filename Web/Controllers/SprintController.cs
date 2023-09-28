@@ -2,6 +2,7 @@ using Application.Sprint.Commands.AddSprint;
 using Application.Sprint.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
+using Application.Sprint;
 
 namespace Web.Controllers;
 
@@ -24,7 +25,7 @@ public class SprintController : BaseApiController
   [HttpGet("GetCurrentSprint")]
   public async Task<IActionResult> GetCurrentSprint()
   {
-    var result = await Mediator.Send(new GetCurrentSprintQuery());
+    var result = await Mediator.Send(new GetCurrentSprintDtoQuery());
     return HandleResult(result);
   }
 }

@@ -4,7 +4,7 @@ using Application.Task;
 
 namespace Application.Sprint;
 
-internal static class SprintMapper
+public static class SprintMapper
 {
   public static Domain.Entities.Sprint ToEntity(this AddSprintCommand sprintCommand)
   {

@@ -19,15 +19,11 @@ public static class ConfigureWebServices
     services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
     services.AddScoped<IIdentityService, IdentityService>();
     services.AddScoped<ITokenService, TokenService>();
-    services.AddScoped<ITaskService, TaskService>();
 
     services.AddCors(options =>
     {
       options.AddPolicy("CorsPolicy",
-        policyBuilder =>
-        {
-          policyBuilder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000");
-        });
+        policyBuilder => { policyBuilder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"); });
     });
 
     services.AddMediatR(conf =>
