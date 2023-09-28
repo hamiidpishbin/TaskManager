@@ -1,5 +1,6 @@
 using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Interfaces.Web;
+using Application.Sprints.Commands.Add;
 using Application.Sprints.Queries;
 using Domain.Entities;
 using Domain.Interface;
@@ -22,22 +23,16 @@ public class SprintController : BaseApiController
   }
 
   [HttpGet("GetSprints")]
-  public IActionResult GetSprints()
-  {
-    return Ok(_context.Sprints.ToList());
-  }
-  
-  [HttpGet("GetSprintsNew")]
-  public async Task<ActionResult<IEnumerable<SprintDto>>> GetSprintsNew()
+  public async Task<ActionResult<IEnumerable<SprintDto>>> GetSprints()
   {
     return Ok(await Mediator.Send(new GetSprintsQuery()));
   }
 
   [HttpPost("AddSprint")]
-  public async Task<IActionResult> AddSprint(AddSprintDto sprintDto)
+  public async Task<IActionResult> AddSprint(AddSprintCommand sprintCommand)
   {
-    await _sprintService.AddSprint(sprintDto);
-    return Ok();
+    var result = await Mediator.Send(sprintCommand);
+    return HandleResult(result);
   }
 
   [HttpGet("GetCurrentSprint")]
