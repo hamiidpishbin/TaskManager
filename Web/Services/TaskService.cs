@@ -19,12 +19,6 @@ public class TaskService : ITaskService
     _context = context;
   }
 
-  public async Task AddTask(AddTaskDto addTaskDto)
-  {
-    _context.Tasks.Add(addTaskDto.ToEntity());
-    await _context.SaveChangesAsync();
-  }
-
   public async Task<List<UserTask>> GetCurrentSprintTasks()
   {
     // var currentSprint = await _sprintService.GetCurrentSprint();

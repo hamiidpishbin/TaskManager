@@ -1,5 +1,5 @@
+using Application.Task.Commands.Add;
 using Application.Task.Queries;
-using Domain.Model.Task;
 
 namespace Application.Task;
 
@@ -21,12 +21,12 @@ public static class TaskMapper
     return (tasks ?? Array.Empty<Domain.Entities.UserTask>()).Select(task => task.ToDto());
   }
 
-  public static Domain.Entities.UserTask ToEntity(this AddTaskDto addTaskDto)
+  public static Domain.Entities.UserTask ToEntity(this AddTaskCommand taskCommand)
   {
     return new Domain.Entities.UserTask()
     {
-      Title = addTaskDto.Title,
-      SprintId = addTaskDto.SprintId,
+      Title = taskCommand.Title,
+      SprintId = taskCommand.SprintId,
     };
   }
 }

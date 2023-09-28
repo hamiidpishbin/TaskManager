@@ -1,8 +1,5 @@
-using Application.Common.Interfaces.Infrastructure;
-using Application.Common.Interfaces.Web;
 using Application.Sprint.Commands.AddSprint;
 using Application.Sprint.Queries;
-using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 
@@ -11,9 +8,10 @@ namespace Web.Controllers;
 public class SprintController : BaseApiController
 {
   [HttpGet("GetSprints")]
-  public async Task<ActionResult<IEnumerable<SprintDto>>> GetSprints()
+  public async Task<IActionResult> GetSprints()
   {
-    return Ok(await Mediator.Send(new GetSprintsQuery()));
+    var result = await Mediator.Send(new GetSprintsQuery());
+    return HandleResult(result);
   }
 
   [HttpPost("AddSprint")]
