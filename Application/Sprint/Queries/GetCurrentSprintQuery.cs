@@ -23,7 +23,7 @@ public class
     var result = await _context.Sprints.FirstOrDefaultAsync(
       s => s.Start >= DateTime.Now && s.End <= DateTime.Now, CancellationToken.None);
     return result is null
-      ? Result<SprintDto>.Success(null!)
+      ? Result<SprintDto>.Success(new SprintDto())
       : Result<SprintDto>.Success(result.ToDto());
   }
 }
