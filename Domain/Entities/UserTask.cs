@@ -5,7 +5,7 @@ using Domain.Interface;
 
 namespace Domain.Entities;
 
-public class UserTask : BaseEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
+public class UserTask : BaseAuditableEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
 {
   public string Title { get; set; }
   public Guid SprintId { get; set; }

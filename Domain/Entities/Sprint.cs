@@ -5,7 +5,7 @@ using Domain.Interface;
 
 namespace Domain.Entities;
 
-public class Sprint : BaseEntity, IStatus, IAutoDateTimeUpdate, ISoftDelete
+public class Sprint : BaseAuditableEntity, IStatus, IAutoDateTimeUpdate, ISoftDelete
 {
   public string Title { get; set; }
   public ICollection<UserTask>? Tasks { get; } = new List<UserTask>();
