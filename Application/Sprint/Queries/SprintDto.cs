@@ -5,5 +5,5 @@ namespace Application.Sprint.Queries;
 
 public class SprintDto : TitledDateTimeRangeDto
 {
-  public IEnumerable<TaskDto> Tasks { get; set; } = new List<TaskDto>();
+  public IEnumerable<UserTaskDto> Tasks { get; set; } = new List<UserTaskDto>();
 }

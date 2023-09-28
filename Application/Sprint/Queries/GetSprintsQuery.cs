@@ -21,8 +21,6 @@ public class
     CancellationToken cancellationToken)
   {
     var result = await _context.Sprints.Include(s => s.Tasks).ToListAsync(CancellationToken.None);
-    return result.Any()
-      ? Result<IEnumerable<SprintDto>>.Success(result.ToDto())
-      : Result<IEnumerable<SprintDto>>.Success(new List<SprintDto>());
+    return Result<IEnumerable<SprintDto>>.Success(result.ToDto());
   }
 }

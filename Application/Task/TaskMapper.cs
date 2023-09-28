@@ -5,9 +5,9 @@ namespace Application.Task;
 
 public static class TaskMapper
 {
-  public static TaskDto ToDto(this Domain.Entities.UserTask userTask)
+  public static UserTaskDto ToDto(this Domain.Entities.UserTask userTask)
   {
-    return new TaskDto()
+    return new UserTaskDto()
     {
       Status = userTask.Status,
       Sprint = userTask.Sprint,
@@ -16,7 +16,7 @@ public static class TaskMapper
     };
   }
 
-  public static IEnumerable<TaskDto> ToDto(this IEnumerable<Domain.Entities.UserTask>? tasks)
+  public static IEnumerable<UserTaskDto> ToDto(this IEnumerable<Domain.Entities.UserTask>? tasks)
   {
     return (tasks ?? Array.Empty<Domain.Entities.UserTask>()).Select(task => task.ToDto());
   }

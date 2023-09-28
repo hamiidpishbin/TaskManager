@@ -23,7 +23,7 @@ public class
     var result = await _mediator.Send(new GetCurrentSprintQuery(), CancellationToken.None);
 
     return result is null
-      ? Result<SprintDto>.Success(new SprintDto())
+      ? Result<SprintDto>.Failure("Sprint Was Not Found")
       : Result<SprintDto>.Success(result.ToDto());
   }
 }

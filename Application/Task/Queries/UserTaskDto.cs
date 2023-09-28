@@ -3,7 +3,7 @@ using Domain.Model.Base;
 
 namespace Application.Task.Queries;
 
-public class TaskDto : TitledDto
+public class UserTaskDto : TitledDto
 {
   public Status Status { get; set; }
   public Domain.Entities.Sprint Sprint { get; set; } = null!;
