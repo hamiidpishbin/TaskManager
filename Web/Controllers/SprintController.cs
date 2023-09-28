@@ -1,11 +1,8 @@
 using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Interfaces.Web;
-using Application.Sprints.Commands.Add;
-using Application.Sprints.Queries;
+using Application.Sprint.Commands.AddSprint;
+using Application.Sprint.Queries;
 using Domain.Entities;
-using Domain.Interface;
-using Domain.Model.Sprint;
-using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 
@@ -13,15 +10,6 @@ namespace Web.Controllers;
 
 public class SprintController : BaseApiController
 {
-  private readonly IApplicationDbContext _context;
-  private readonly ISprintService _sprintService;
-
-  public SprintController(IApplicationDbContext context, ISprintService sprintService)
-  {
-    _context = context;
-    _sprintService = sprintService;
-  }
-
   [HttpGet("GetSprints")]
   public async Task<ActionResult<IEnumerable<SprintDto>>> GetSprints()
   {
@@ -36,8 +24,9 @@ public class SprintController : BaseApiController
   }
 
   [HttpGet("GetCurrentSprint")]
-  public async Task<ActionResult<Sprint>> GetCurrentSprint()
+  public async Task<IActionResult> GetCurrentSprint()
   {
-    return Ok(await _sprintService.GetCurrentSprint());
+    var result = await Mediator.Send(new GetCurrentSprintQuery());
+    return HandleResult(result);
   }
 }

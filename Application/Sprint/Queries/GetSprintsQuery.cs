@@ -1,10 +1,8 @@
 using Application.Common.Interfaces.Infrastructure;
-using Application.Common.Mappings;
-using Domain.Model.Sprint;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace Application.Sprints.Queries;
+namespace Application.Sprint.Queries;
 
 public record GetSprintsQuery : IRequest<IEnumerable<SprintDto>>;
 
@@ -16,8 +14,9 @@ public class GetSprintsQueryHandler : IRequestHandler<GetSprintsQuery, IEnumerab
   {
     _context = context;
   }
-  
-  public async Task<IEnumerable<SprintDto>> Handle(GetSprintsQuery request, CancellationToken cancellationToken)
+
+  public async Task<IEnumerable<SprintDto>> Handle(GetSprintsQuery request,
+    CancellationToken cancellationToken)
   {
     var result = await _context.Sprints.Include(s => s.Tasks).ToListAsync(CancellationToken.None);
     return result.ToDto();

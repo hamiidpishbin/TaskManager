@@ -5,7 +5,6 @@ using Infrastructure.Identity;
 using Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Task = Domain.Entities.Task;
 
 namespace Infrastructure.Data;
 
@@ -17,9 +16,10 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>, IApplicationDbCo
 
   public DbSet<Sprint> Sprints => Set<Sprint>();
   public DbSet<Issue> Issues => Set<Issue>();
-  public DbSet<Task> Tasks => Set<Task>();
+  public DbSet<UserTask> Tasks => Set<UserTask>();
 
-  public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
+  public override async Task<int> SaveChangesAsync(
+    CancellationToken cancellationToken = new CancellationToken())
   {
     return await base.SaveChangesAsync(cancellationToken);
   }
@@ -31,11 +31,10 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>, IApplicationDbCo
     optionsBuilder.AddInterceptors(new AutoDateTimeUpdateInterceptor());
     base.OnConfiguring(optionsBuilder);
   }
-  
+
   protected override void OnModelCreating(ModelBuilder builder)
   {
     builder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     base.OnModelCreating(builder);
   }
-
 }

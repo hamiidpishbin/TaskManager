@@ -1,9 +1,10 @@
 using Domain.Model.Task;
+using Domain.Entities;
 
 namespace Application.Common.Interfaces.Web;
 
 public interface ITaskService
 {
-  Task<List<Domain.Entities.Task>> GetCurrentSprintTasks();
-  Task AddTask(AddTaskDto addTaskDto);
+  Task<List<UserTask>> GetCurrentSprintTasks();
+  System.Threading.Tasks.Task AddTask(AddTaskDto addTaskDto);
 }

@@ -1,8 +1,8 @@
 using Application.Common.Interfaces.Web;
+using Domain.Entities;
 using Domain.Interface;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
-using Task = Domain.Entities.Task;
 
 namespace Web.Controllers;
 
@@ -14,9 +14,9 @@ public class DailyTaskController : BaseApiController
   {
     _taskService = taskService;
   }
-  
+
   [HttpGet]
-  public async Task<ActionResult<List<Task>>> GetCurrentSprintTasks()
+  public async Task<ActionResult<List<UserTask>>> GetCurrentSprintTasks()
   {
     return Ok(await _taskService.GetCurrentSprintTasks());
   }

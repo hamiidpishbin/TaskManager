@@ -20,9 +20,9 @@ public class TaskController : BaseApiController
   {
     await _taskService.AddTask(addTaskDto);
   }
-  
+
   [HttpGet("GetCurrentSprintTasks")]
-  public async Task<ActionResult<List<Domain.Entities.Task>>> GetCurrentSprintTasks()
+  public async Task<ActionResult<List<Domain.Entities.UserTask>>> GetCurrentSprintTasks()
   {
     var result = await _taskService.GetCurrentSprintTasks();
     return Ok(result);

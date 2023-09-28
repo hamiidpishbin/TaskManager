@@ -16,7 +16,9 @@
 
     <ItemGroup>
       <Folder Include="Common\Exceptions\" />
-      <Folder Include="Tasks\Commands\" />
+        <Folder Include="Common\Mappings\"/>
+        <Folder Include="Sprint\Commands\GetCurrentSprint\"/>
+        <Folder Include="Task\Commands\"/>
     </ItemGroup>
 
     <ItemGroup>

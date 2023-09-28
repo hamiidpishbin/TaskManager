@@ -1,12 +1,12 @@
+using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Task = Domain.Entities.Task;
 
 namespace Infrastructure.EntityConfigurations;
 
-public class TaskEntityTypeConfiguration : IEntityTypeConfiguration<Task>
+public class TaskEntityTypeConfiguration : IEntityTypeConfiguration<UserTask>
 {
-  public void Configure(EntityTypeBuilder<Task> builder)
+  public void Configure(EntityTypeBuilder<UserTask> builder)
   {
     builder.HasQueryFilter(x => x.IsDeleted == false);
   }

@@ -1,7 +1,7 @@
-using Application.Tasks.Queries;
+using Application.Task.Queries;
 using Domain.Model.Base;
 
-namespace Application.Sprints.Queries;
+namespace Application.Sprint.Queries;
 
 public class SprintDto : TitledDateTimeRangeDto
 {

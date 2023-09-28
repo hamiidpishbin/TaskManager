@@ -2,7 +2,7 @@ using Application.Common.Interfaces.Infrastructure;
 using Application.Common.Models;
 using MediatR;
 
-namespace Application.Sprints.Commands.Add;
+namespace Application.Sprint.Commands.AddSprint;
 
 public record AddSprintCommand : IRequest<Result<Unit>>
 {
@@ -20,7 +20,8 @@ public class AddSprintCommandHandler : IRequestHandler<AddSprintCommand, Result<
     _context = context;
   }
 
-  public async Task<Result<Unit>> Handle(AddSprintCommand request, CancellationToken cancellationToken)
+  public async Task<Result<Unit>> Handle(AddSprintCommand request,
+    CancellationToken cancellationToken)
   {
     _context.Sprints.Add(request.ToEntity());
     var result = await _context.SaveChangesAsync(CancellationToken.None) > 0;
