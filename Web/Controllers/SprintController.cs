@@ -3,6 +3,7 @@ using Application.Sprint.Queries;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 using Application.Sprint;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Web.Controllers;
 

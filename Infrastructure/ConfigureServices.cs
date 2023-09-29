@@ -1,5 +1,6 @@
-using Domain.Interface;
+using Application.Common.Interfaces.Infrastructure;
 using Infrastructure.Data;
+using Infrastructure.Interceptors;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,8 +13,15 @@ public static class ConfigureServices
     IConfiguration configuration)
   {
     var connectionString = configuration.GetConnectionString("DefaultConnection");
-    Guard.Against.Null(connectionString, message: "Connection String 'DefaultConnection' NOt Found");
-    services.AddDbContext<ApplicationDbContext>(options => { options.UseSqlServer(connectionString); });
+    Guard.Against.Null(connectionString, message: "Connection String 'DefaultConnection' Not Found");
+    services.AddDbContext<ApplicationDbContext>((provider, options) =>
+    {
+      options.UseSqlServer(connectionString);
+      options.AddInterceptors(new SoftDeleteInterceptor());
+      options.AddInterceptors(new StatusInterceptor());
+      options.AddInterceptors(new AutoDateTimeUpdateInterceptor());
+      options.AddInterceptors(new AutoAuditInterceptor(provider));
+    });
 
     return services;
   }

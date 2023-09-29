@@ -8,13 +8,13 @@ namespace Infrastructure.Interceptors;
 
 public class AutoDateTimeUpdateInterceptor : SaveChangesInterceptor
 {
-  public override int SavedChanges(SaveChangesCompletedEventData eventData, int result)
+  public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
   {
     if (eventData.Context is null) return result;
 
     foreach (var entry in eventData.Context.ChangeTracker.Entries())
     {
-      if (entry is not {State: EntityState.Modified, Entity: IAutoDateTimeUpdate entity and IStatus status}) continue;
+      if (entry is not { State: EntityState.Modified, Entity: IAutoDateTimeUpdate entity and IStatus status }) continue;
 
       switch (status.Status)
       {
