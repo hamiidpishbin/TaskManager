@@ -1,5 +1,5 @@
-using Application.Account.Commands.CreateAccount;
-using Application.Account.Queries.Login;
+using Application.Interfaces;
+using Infrastructure.Dtos.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
@@ -9,17 +9,24 @@ namespace Web.Controllers;
 [AllowAnonymous]
 public class AccountController : BaseApiController
 {
-  [HttpPost("Login")]
-  public async Task<IActionResult> Login(LoginQuery loginQuery)
+  private readonly IIdentityService _identityService;
+
+  public AccountController(IIdentityService identityService)
   {
-    var result = await Mediator.Send(loginQuery);
+    _identityService = identityService;
+  }
+
+  [HttpPost("Login")]
+  public async Task<IActionResult> Login(LoginDto loginDto)
+  {
+    var result = await _identityService.LoginAsync(loginDto);
     return HandleResult(result);
   }
 
   [HttpPost("Signup")]
-  public async Task<IActionResult> Signup(CreateAccountCommand request)
+  public async Task<IActionResult> Signup(SignUpDto signUpDto)
   {
-    var result = await Mediator.Send(request);
+    var result = await _identityService.CreateUserAsync(signUpDto);
     return HandleResult(result);
   }
 }

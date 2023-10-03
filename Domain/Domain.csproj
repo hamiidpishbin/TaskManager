@@ -17,4 +17,9 @@
     <ItemGroup>
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.20" />
     </ItemGroup>
+
+    <ItemGroup>
+        <Folder Include="Interfaces\Services\"/>
+        <Folder Include="Model\Account\"/>
+    </ItemGroup>
 </Project>

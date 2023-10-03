@@ -1,11 +1,14 @@
 ﻿using System.Text;
 using Application.Common.Interfaces.Infrastructure;
-using Application.Common.Interfaces.Web;
-using Application.Sprint.Queries;
+using Application.Interfaces;
+using Application.Services;
+using Infrastructure.Common;
 using Infrastructure.Data;
-using Infrastructure.Identity;
+using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Web.Services;
 
@@ -26,9 +29,6 @@ public static class ConfigureWebServices
         policyBuilder => { policyBuilder.AllowAnyMethod().AllowAnyHeader().WithOrigins("http://localhost:3000"); });
     });
 
-    services.AddMediatR(conf =>
-      conf.RegisterServicesFromAssembly(typeof(GetSprintsQuery).Assembly));
-
     services.AddIdentityCore<AppUser>()
       .AddEntityFrameworkStores<ApplicationDbContext>()
       .AddSignInManager<SignInManager<AppUser>>();
@@ -43,6 +43,12 @@ public static class ConfigureWebServices
         ValidateIssuer = false,
         ValidateAudience = false,
       };
+    });
+
+    services.AddControllers(options =>
+    {
+      var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+      options.Filters.Add(new AuthorizeFilter(policy));
     });
 
     return services;

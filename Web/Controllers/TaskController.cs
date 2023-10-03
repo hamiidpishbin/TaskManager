@@ -1,5 +1,5 @@
-using Application.Task.Commands.Add;
-using Application.Task.Queries;
+using Application.Dtos.UserTask;
+using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Web.Base;
 
@@ -7,17 +7,24 @@ namespace Web.Controllers;
 
 public class TaskController : BaseApiController
 {
-  [HttpPost("AddTask")]
-  public async Task<IActionResult> AddTask(AddTaskCommand addTaskCommand)
+  private readonly ITaskService _taskService;
+
+  public TaskController(ITaskService taskService)
   {
-    var result = await Mediator.Send(addTaskCommand);
+    _taskService = taskService;
+  }
+
+  [HttpPost("AddTask")]
+  public async Task<IActionResult> AddTask(AddUserTaskDto addUserTaskDto)
+  {
+    var result = await _taskService.AddUserTask(addUserTaskDto);
     return HandleResult(result);
   }
 
   [HttpGet("GetCurrentSprintTasks")]
-  public async Task<IActionResult> GetCurrentSprintTasks()
+  public async Task<IActionResult> GetCurrentSprintTasks(GetUserTasksDto getUserTasksDto)
   {
-    var result = await Mediator.Send(new GetCurrentSprintTasksQuery());
+    var result = await _taskService.GetUserTasks(getUserTasksDto);
     return HandleResult(result);
   }
 }

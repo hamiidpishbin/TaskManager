@@ -2,10 +2,11 @@ using Application.Common.Interfaces.Web;
 using Domain.Common;
 using Domain.Enums;
 using Domain.Interface;
+using Domain.Interfaces;
 
 namespace Domain.Entities;
 
-public class UserTask : BaseAuditableEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
+public record UserTask : BaseAuditableEntity, ISoftDelete, IAutoDateTimeUpdate, IStatus
 {
   public string Title { get; set; }
   public Guid SprintId { get; set; }

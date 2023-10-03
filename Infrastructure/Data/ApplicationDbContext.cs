@@ -1,7 +1,7 @@
 using System.Reflection;
 using Application.Common.Interfaces.Infrastructure;
 using Domain.Entities;
-using Infrastructure.Identity;
+using Infrastructure.Common;
 using Infrastructure.Interceptors;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;

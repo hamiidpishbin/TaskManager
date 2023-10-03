@@ -5,7 +5,7 @@ using Domain.Interface;
 
 namespace Domain.Entities;
 
-public class Issue : BaseAuditableEntity, ISoftDelete, IStatus
+public record Issue : BaseAuditableEntity, ISoftDelete, IStatus
 {
   public bool IsDeleted { get; set; }
   public Status Status { get; set; }

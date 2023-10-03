@@ -1,4 +1,5 @@
 using Application.Common.Interfaces.Infrastructure;
+using Application.Interfaces;
 using Domain.Common;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -16,7 +17,7 @@ public class AutoAuditInterceptor : SaveChangesInterceptor
   }
 
   public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(DbContextEventData eventData, InterceptionResult<int> result,
-    CancellationToken cancellationToken = new CancellationToken())
+    CancellationToken cancellationToken = new())
   {
     if (eventData.Context is null) return result;
 

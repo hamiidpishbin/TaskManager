@@ -1,6 +1,6 @@
 namespace Domain.Common
 {
-  public class BaseEntity
+  public record BaseEntity
   {
     public Guid Id { get; set; }
   }
