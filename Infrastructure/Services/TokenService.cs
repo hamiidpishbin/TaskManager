@@ -1,18 +1,12 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using Application.Common.Interfaces.Web;
 using Application.Dtos.Identity;
 using Application.Interfaces;
-using Application.Services;
-using Domain.Interfaces;
-using Domain.Model;
-using Infrastructure.Common;
-using Infrastructure.Dtos.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Web.Services;
+namespace Infrastructure.Services;
 
 public class TokenService : ITokenService
 {

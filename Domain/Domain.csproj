@@ -20,6 +20,5 @@
 
     <ItemGroup>
         <Folder Include="Interfaces\Services\"/>
-        <Folder Include="Model\Account\"/>
     </ItemGroup>
 </Project>
