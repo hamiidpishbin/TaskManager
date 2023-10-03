@@ -1,5 +1,5 @@
-using Application.Common.Models;
 using Application.Dtos.UserTask;
+using Application.Models;
 
 namespace Application.Interfaces;
 

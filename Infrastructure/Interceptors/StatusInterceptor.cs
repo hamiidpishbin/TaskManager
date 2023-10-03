@@ -1,6 +1,5 @@
-using Application.Common.Interfaces.Web;
 using Domain.Enums;
-using Domain.Interface;
+using Domain.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
@@ -14,8 +13,8 @@ public class StatusInterceptor : SaveChangesInterceptor
 
     foreach (var entry in eventData.Context.ChangeTracker.Entries())
     {
-      if (entry is not {State: EntityState.Added, Entity: IStatus added}) continue;
-      
+      if (entry is not { State: EntityState.Added, Entity: IStatus added }) continue;
+
       added.Status = Status.New;
     }
 

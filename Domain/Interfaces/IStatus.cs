@@ -1,6 +1,6 @@
 using Domain.Enums;
 
-namespace Application.Common.Interfaces.Web;
+namespace Domain.Interfaces;
 
 public interface IStatus
 {

@@ -1,4 +1,4 @@
-using Application.Dtos.Identity;
+using Application.Models.Identity;
 
 namespace Application.Interfaces;
 

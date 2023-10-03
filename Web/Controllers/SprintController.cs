@@ -1,7 +1,6 @@
-using Application.Dtos.Sprint;
 using Application.Interfaces;
+using Application.Models.Sprint;
 using Microsoft.AspNetCore.Mvc;
-using Web.Base;
 
 namespace Web.Controllers;
 

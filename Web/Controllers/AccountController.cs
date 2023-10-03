@@ -1,8 +1,7 @@
 using Application.Interfaces;
-using Infrastructure.Dtos.Identity;
+using Application.Models.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Web.Base;
 
 namespace Web.Controllers;
 

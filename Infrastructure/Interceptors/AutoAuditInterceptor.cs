@@ -1,6 +1,5 @@
-using Application.Common.Interfaces.Infrastructure;
 using Application.Interfaces;
-using Domain.Common;
+using Domain.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.Extensions.DependencyInjection;

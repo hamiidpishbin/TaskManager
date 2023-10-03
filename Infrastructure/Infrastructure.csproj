@@ -21,8 +21,6 @@
     <ItemGroup>
       <ProjectReference Include="..\Application\Application.csproj" />
       <ProjectReference Include="..\Domain\Domain.csproj" />
-        <Folder Include="Identity\"/>
-        <Folder Include="Interfaces\"/>
     </ItemGroup>
 
 

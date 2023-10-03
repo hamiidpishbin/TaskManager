@@ -1,8 +1,7 @@
 using System.Text.Json.Serialization;
-using Application.Common.Interfaces.Web;
-using Domain.Common;
+using Domain.Base;
 using Domain.Enums;
-using Domain.Interface;
+using Domain.Interfaces;
 
 namespace Domain.Entities;
 

@@ -1,7 +1,6 @@
-using Application.Common.Interfaces.Infrastructure;
-using Application.Common.Models;
-using Application.Dtos.Sprint;
 using Application.Interfaces;
+using Application.Models;
+using Application.Models.Sprint;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 

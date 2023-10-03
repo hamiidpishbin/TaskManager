@@ -1,5 +1,5 @@
-using Application.Common.Models;
-using Application.Dtos.Sprint;
+using Application.Models;
+using Application.Models.Sprint;
 
 namespace Application.Interfaces;
 

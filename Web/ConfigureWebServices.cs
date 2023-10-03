@@ -1,16 +1,13 @@
 ﻿using System.Text;
-using Application.Common.Interfaces.Infrastructure;
 using Application.Interfaces;
-using Application.Services;
-using Infrastructure.Common;
 using Infrastructure.Data;
+using Infrastructure.Models;
 using Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.IdentityModel.Tokens;
-using Web.Services;
 
 namespace Web;
 

@@ -1,7 +1,6 @@
 using Application.Dtos.UserTask;
 using Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Web.Base;
 
 namespace Web.Controllers;
 

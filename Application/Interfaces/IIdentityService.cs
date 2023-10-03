@@ -1,6 +1,5 @@
-using Application.Common.Models;
-using Application.Dtos.Identity;
-using Infrastructure.Dtos.Identity;
+using Application.Models;
+using Application.Models.Identity;
 
 namespace Application.Interfaces;
 

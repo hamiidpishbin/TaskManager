@@ -1,12 +1,11 @@
 using System.Security.Claims;
-using Application.Common.Models;
-using Application.Dtos.Identity;
 using Application.Interfaces;
+using Application.Models;
+using Application.Models.Identity;
 using AutoMapper;
-using Domain.Constants;
-using Domain.Enums.Results;
-using Infrastructure.Common;
-using Infrastructure.Dtos.Identity;
+using Domain.Constant;
+using Domain.Enums;
+using Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
