@@ -3,17 +3,30 @@ using Application.Interfaces;
 using Application.Models;
 using Application.Models.Identity;
 using AutoMapper;
-using Domain.Constant;
-using Domain.Enums;
+using Domain.Extensions;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using IdentityResult = Domain.Enums.IdentityResult;
 
 namespace Infrastructure.Services;
 
 public class IdentityService : IIdentityService
 {
+  #region Private Methods
+
+  private UserDto GetUserDto(AppUser user)
+  {
+    return new UserDto
+    {
+      DisplayName = user.DisplayName,
+      Token = _tokenService.CreateToken(_mapper.Map<AppUserDto>(user))
+    };
+  }
+
+  #endregion
+
   #region Ctor
 
   private readonly SignInManager<AppUser> _signInManager;
@@ -45,29 +58,28 @@ public class IdentityService : IIdentityService
 
     if (user == null)
     {
-      return Result<UserDto>.Failure(IdentityFailureReasons.Unauthorized);
+      return Result<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
     }
 
     var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
     return signInResult.Succeeded
       ? Result<UserDto>.Success(GetUserDto(user))
-      : Result<UserDto>.Failure(IdentityFailureReasons.Unauthorized);
+      : Result<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
   }
 
   public async Task<Result<bool>> CreateUserAsync(SignUpDto signUpDto)
   {
     var userNameIsTaken = await _userManager.Users.AnyAsync(user => user.UserName == signUpDto.UserName);
-    var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == signUpDto.Email);
-
     if (userNameIsTaken)
     {
-      return Result<bool>.Failure(GetEnumString(AccountResult.UserNameIsTaken));
+      return Result<bool>.Failure(IdentityResult.UserNameIsTaken.GetDescription());
     }
 
+    var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == signUpDto.Email);
     if (emailIsTaken)
     {
-      return Result<bool>.Failure(GetEnumString(AccountResult.EmailIsTaken));
+      return Result<bool>.Failure(IdentityResult.EmailIsTaken.GetDescription());
     }
 
     var user = new AppUser
@@ -80,7 +92,7 @@ public class IdentityService : IIdentityService
     var createdUser = await _userManager.CreateAsync(user, signUpDto.Password);
 
     return createdUser is not { Succeeded: true }
-      ? Result<bool>.Failure(IdentityFailureReasons.UnknownError)
+      ? Result<bool>.Failure(createdUser.Errors.ToList().First().ToString())
       : Result<bool>.Success(true);
   }
 
@@ -91,24 +103,6 @@ public class IdentityService : IIdentityService
     var user = await _userManager.FindByEmailAsync(currentUserEmail);
 
     return _mapper.Map<AppUserDto>(user);
-  }
-
-  #endregion
-
-  #region Private Methods
-
-  private string GetEnumString(Enum enumeration)
-  {
-    return Enum.GetName(enumeration.GetType(), enumeration)!;
-  }
-
-  private UserDto GetUserDto(AppUser user)
-  {
-    return new UserDto
-    {
-      DisplayName = user.DisplayName,
-      Token = _tokenService.CreateToken(_mapper.Map<AppUserDto>(user))
-    };
   }
 
   #endregion
