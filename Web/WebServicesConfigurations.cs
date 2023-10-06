@@ -11,7 +11,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Web;
 
-public static class ConfigureWebServices
+public static class WebServicesConfigurations
 {
   public static IServiceCollection AddWebServices(this IServiceCollection services,
     IConfiguration config)
