@@ -3,6 +3,7 @@ using Application.Interfaces;
 using Application.Models;
 using Application.Models.Identity;
 using AutoMapper;
+using Domain.Common;
 using Domain.Extensions;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
@@ -52,34 +53,34 @@ public class IdentityService : IIdentityService
 
   #region Public Methods
 
-  public async Task<Result<UserDto>> LoginAsync(LoginDto loginDto)
+  public async Task<OldResult<UserDto>> LoginAsync(LoginDto loginDto)
   {
     var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
     if (user == null)
     {
-      return Result<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
+      return OldResult<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
     }
 
     var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
     return signInResult.Succeeded
-      ? Result<UserDto>.Success(GetUserDto(user))
-      : Result<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
+      ? OldResult<UserDto>.Success(GetUserDto(user))
+      : OldResult<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
   }
 
-  public async Task<Result<bool>> CreateUserAsync(SignUpDto signUpDto)
+  public async Task<OldResult<bool>> CreateUserAsync(SignUpDto signUpDto)
   {
     var userNameIsTaken = await _userManager.Users.AnyAsync(user => user.UserName == signUpDto.UserName);
     if (userNameIsTaken)
     {
-      return Result<bool>.Failure(IdentityResult.UserNameIsTaken.GetDescription());
+      return OldResult<bool>.Failure(IdentityResult.UserNameIsTaken.GetDescription());
     }
 
     var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == signUpDto.Email);
     if (emailIsTaken)
     {
-      return Result<bool>.Failure(IdentityResult.EmailIsTaken.GetDescription());
+      return OldResult<bool>.Failure(IdentityResult.EmailIsTaken.GetDescription());
     }
 
     var user = new AppUser
@@ -92,8 +93,8 @@ public class IdentityService : IIdentityService
     var createdUser = await _userManager.CreateAsync(user, signUpDto.Password);
 
     return createdUser is not { Succeeded: true }
-      ? Result<bool>.Failure(createdUser.Errors.ToList().First().ToString())
-      : Result<bool>.Success(true);
+      ? OldResult<bool>.Failure(createdUser.Errors.ToList().First().ToString())
+      : OldResult<bool>.Success(true);
   }
 
   public async Task<AppUserDto> GetCurrentUser()

@@ -1,8 +1,9 @@
-using Application.Dtos.UserTask;
 using Application.Helpers;
 using Application.Interfaces;
 using Application.Models;
+using Application.Models.UserTask;
 using AutoMapper;
+using Domain.Common;
 using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,20 +20,20 @@ public class TaskService : ITaskService
     _mapper = mapper;
   }
 
-  public async Task<Result<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto)
+  public async Task<OldResult<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto)
   {
     var userTasks = await _context.Tasks.Where(u => u.Id == getUserTasksDto.Id).ToListAsync();
     var result = _mapper.Map<List<UserTaskDto>>(userTasks);
-    return Result<List<UserTaskDto>>.Success(result);
+    return OldResult<List<UserTaskDto>>.Success(result);
   }
 
-  public async Task<Result<bool>> AddUserTask(AddUserTaskDto addUserTaskDto)
+  public async Task<OldResult<bool>> AddUserTask(AddUserTaskDto addUserTaskDto)
   {
     var userTask = _mapper.Map<UserTask>(addUserTaskDto);
     _context.Tasks.Add(userTask);
     var result = await _context.SaveChangesAsync(CancellationToken.None) > 0;
     return result
-      ? Result<bool>.Success(true)
-      : Result<bool>.Failure(LogHelper.GetFailureLog("Add Task"));
+      ? OldResult<bool>.Success(true)
+      : OldResult<bool>.Failure(LogHelper.GetFailureLog("Add Task"));
   }
 }

@@ -1,4 +1,4 @@
-namespace Application.Dtos.UserTask;
+namespace Application.Models.UserTask;
 
 public record AddUserTaskDto
 {

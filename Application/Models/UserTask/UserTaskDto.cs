@@ -1,7 +1,6 @@
-using Application.Models;
 using Domain.Enums;
 
-namespace Application.Dtos.UserTask;
+namespace Application.Models.UserTask;
 
 public record UserTaskDto : BaseDto
 {

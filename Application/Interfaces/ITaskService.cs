@@ -1,10 +1,11 @@
-using Application.Dtos.UserTask;
 using Application.Models;
+using Application.Models.UserTask;
+using Domain.Common;
 
 namespace Application.Interfaces;
 
 public interface ITaskService
 {
-  Task<Result<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto);
-  Task<Result<bool>> AddUserTask(AddUserTaskDto addUserTaskDto);
+  Task<OldResult<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto);
+  Task<OldResult<bool>> AddUserTask(AddUserTaskDto addUserTaskDto);
 }

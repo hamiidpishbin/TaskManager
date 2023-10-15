@@ -1,5 +1,4 @@
-using Application.Dtos;
-using Application.Dtos.UserTask;
+using Application.Models.UserTask;
 
 namespace Application.Models.Sprint;
 

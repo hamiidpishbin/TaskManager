@@ -1,14 +1,14 @@
-using Application.Dtos.UserTask;
 using Application.Interfaces;
+using Application.Models.UserTask;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Controllers;
 
-public class TaskController : BaseApiController
+public class UserTaskController : BaseApiController
 {
   private readonly ITaskService _taskService;
 
-  public TaskController(ITaskService taskService)
+  public UserTaskController(ITaskService taskService)
   {
     _taskService = taskService;
   }

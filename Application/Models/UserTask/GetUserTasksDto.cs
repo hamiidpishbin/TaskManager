@@ -1,6 +1,4 @@
-using Application.Models;
-
-namespace Application.Dtos.UserTask;
+namespace Application.Models.UserTask;
 
 public record GetUserTasksDto : BaseDto
 {

@@ -1,12 +1,13 @@
 using Application.Models;
 using Application.Models.Sprint;
+using Domain.Common;
 
 namespace Application.Interfaces;
 
 public interface ISprintService
 {
-  Task<Result<IEnumerable<SprintDto>>> GetSprintsAsync();
+  Task<OldResult<IEnumerable<SprintDto>>> GetSprintsAsync();
   Task<Domain.Entities.Sprint> GetCurrentSprintAsync();
-  Task<Result<SprintDto>> GetCurrentSprintDtoAsync();
-  Task<Result<bool>> AddSprintAsync(AddSprintDto addSprintDto);
+  Task<OldResult<SprintDto>> GetCurrentSprintDtoAsync();
+  Task<OldResult<bool>> AddSprintAsync(AddSprintDto addSprintDto);
 }

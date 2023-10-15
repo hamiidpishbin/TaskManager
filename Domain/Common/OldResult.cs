@@ -1,23 +1,23 @@
-namespace Application.Models;
+namespace Domain.Common;
 
-public class Result<T>
+public class OldResult<T>
 {
   public bool Succeeded { get; set; }
   public T Value { get; set; }
   public string? Error { get; set; }
 
-  public static Result<T> Success(T value)
+  public static OldResult<T> Success(T value)
   {
-    return new Result<T>
+    return new OldResult<T>
     {
       Succeeded = true,
       Value = value
     };
   }
 
-  public static Result<T> Failure(string? error)
+  public static OldResult<T> Failure(string? error)
   {
-    return new Result<T>
+    return new OldResult<T>
     {
       Succeeded = false,
       Error = error
