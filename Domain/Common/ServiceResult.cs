@@ -1,23 +1,29 @@
-using Domain.Base;
 using Domain.Enums;
+using Domain.Extensions;
 
 namespace Domain.Common;
 
-public record ServiceResult<TResult> : BaseResult<TResult, ServiceErrorResult, ServiceErrorType>
+public class ServiceResult<T>
 {
-  public ServiceResult(TResult value) : base(value)
+  public bool Succeeded { get; set; }
+  public T Value { get; set; }
+  public Enum Error { get; set; }
+
+  public static ServiceResult<T> Success(T value)
   {
+    return new ServiceResult<T>
+    {
+      Succeeded = true,
+      Value = value
+    };
   }
 
-  public ServiceResult(ServiceErrorResult serviceError) : base(serviceError)
+  public static ServiceResult<T> Failure(Enum error)
   {
-  }
-
-  public ServiceResult(IEnumerable<ServiceErrorResult>? errors) : base(errors)
-  {
-  }
-
-  public ServiceResult(bool isSuccessful, TResult value, IEnumerable<ServiceErrorResult>? errors) : base(isSuccessful, value, errors)
-  {
+    return new ServiceResult<T>
+    {
+      Succeeded = false,
+      Error = error
+    };
   }
 }

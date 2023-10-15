@@ -1,4 +1,3 @@
-using Application.Models;
 using Domain.Common;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -10,13 +9,13 @@ namespace Web.Controllers;
 [Authorize]
 public class BaseApiController : ControllerBase
 {
-  protected IActionResult HandleResult<T>(OldResult<T> oldResult)
+  protected IActionResult HandleResult<T>(ServiceResult<T> serviceResult)
   {
-    return oldResult.Succeeded switch
+    return serviceResult.Succeeded switch
     {
-      true when oldResult.Value != null => Ok(oldResult.Value),
-      true when oldResult.Value == null => NotFound(),
-      _ => BadRequest(oldResult.Error)
+      true when serviceResult.Value != null => Ok(serviceResult.Value),
+      true when serviceResult.Value == null => NotFound(),
+      _ => BadRequest(serviceResult.Error)
     };
   }
 }

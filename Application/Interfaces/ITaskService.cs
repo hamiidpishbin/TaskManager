@@ -6,6 +6,6 @@ namespace Application.Interfaces;
 
 public interface ITaskService
 {
-  Task<OldResult<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto);
-  Task<OldResult<bool>> AddUserTask(AddUserTaskDto addUserTaskDto);
+  Task<ServiceResult<List<UserTaskDto>>> GetUserTasks(GetUserTasksDto getUserTasksDto);
+  Task<ServiceResult<bool>> AddUserTask(AddUserTaskDto addUserTaskDto);
 }

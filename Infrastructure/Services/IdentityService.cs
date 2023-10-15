@@ -1,15 +1,14 @@
 using System.Security.Claims;
 using Application.Interfaces;
-using Application.Models;
 using Application.Models.Identity;
 using AutoMapper;
 using Domain.Common;
-using Domain.Extensions;
+using Domain.Enums;
+using Domain.Enums.ErrorTypes;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using IdentityResult = Domain.Enums.IdentityResult;
 
 namespace Infrastructure.Services;
 
@@ -53,34 +52,34 @@ public class IdentityService : IIdentityService
 
   #region Public Methods
 
-  public async Task<OldResult<UserDto>> LoginAsync(LoginDto loginDto)
+  public async Task<ServiceResult<UserDto>> LoginAsync(LoginDto loginDto)
   {
     var user = await _userManager.FindByEmailAsync(loginDto.Email);
 
     if (user == null)
     {
-      return OldResult<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
+      return ServiceResult<UserDto>.Failure(IdentityErrorType.IncorrectLoginCredentials);
     }
 
     var signInResult = await _signInManager.CheckPasswordSignInAsync(user, loginDto.Password, false);
 
     return signInResult.Succeeded
-      ? OldResult<UserDto>.Success(GetUserDto(user))
-      : OldResult<UserDto>.Failure(IdentityResult.IncorrectLoginCredentials.GetDescription());
+      ? ServiceResult<UserDto>.Success(GetUserDto(user))
+      : ServiceResult<UserDto>.Failure(IdentityErrorType.IncorrectLoginCredentials);
   }
 
-  public async Task<OldResult<bool>> CreateUserAsync(SignUpDto signUpDto)
+  public async Task<ServiceResult<bool>> CreateUserAsync(SignUpDto signUpDto)
   {
     var userNameIsTaken = await _userManager.Users.AnyAsync(user => user.UserName == signUpDto.UserName);
     if (userNameIsTaken)
     {
-      return OldResult<bool>.Failure(IdentityResult.UserNameIsTaken.GetDescription());
+      return ServiceResult<bool>.Failure(IdentityErrorType.UserNameIsTaken);
     }
 
     var emailIsTaken = await _userManager.Users.AnyAsync(user => user.Email == signUpDto.Email);
     if (emailIsTaken)
     {
-      return OldResult<bool>.Failure(IdentityResult.EmailIsTaken.GetDescription());
+      return ServiceResult<bool>.Failure(IdentityErrorType.EmailIsTaken);
     }
 
     var user = new AppUser
@@ -93,8 +92,8 @@ public class IdentityService : IIdentityService
     var createdUser = await _userManager.CreateAsync(user, signUpDto.Password);
 
     return createdUser is not { Succeeded: true }
-      ? OldResult<bool>.Failure(createdUser.Errors.ToList().First().ToString())
-      : OldResult<bool>.Success(true);
+      ? ServiceResult<bool>.Failure(CommonErrorType.UnexpectedError)
+      : ServiceResult<bool>.Success(true);
   }
 
   public async Task<AppUserDto> GetCurrentUser()

@@ -6,7 +6,7 @@ namespace Application.Interfaces;
 
 public interface IIdentityService
 {
-  Task<OldResult<bool>> CreateUserAsync(SignUpDto signUpDto);
-  Task<OldResult<UserDto>> LoginAsync(LoginDto loginDto);
+  Task<ServiceResult<bool>> CreateUserAsync(SignUpDto signUpDto);
+  Task<ServiceResult<UserDto>> LoginAsync(LoginDto loginDto);
   Task<AppUserDto> GetCurrentUser();
 }
