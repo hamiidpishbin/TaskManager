@@ -3,7 +3,6 @@ using Application.Interfaces;
 using Application.Models.Identity;
 using AutoMapper;
 using Domain.Common;
-using Domain.Enums;
 using Domain.Enums.ErrorTypes;
 using Infrastructure.Models;
 using Microsoft.AspNetCore.Http;
@@ -15,7 +14,6 @@ namespace Infrastructure.Services;
 public class IdentityService : IIdentityService
 {
   #region Private Methods
-
   private UserDto GetUserDto(AppUser user)
   {
     return new UserDto
@@ -24,11 +22,8 @@ public class IdentityService : IIdentityService
       Token = _tokenService.CreateToken(_mapper.Map<AppUserDto>(user))
     };
   }
-
   #endregion
-
   #region Ctor
-
   private readonly SignInManager<AppUser> _signInManager;
   private readonly IHttpContextAccessor _httpContextAccessor;
   private readonly IMapper _mapper;
@@ -47,11 +42,9 @@ public class IdentityService : IIdentityService
     _httpContextAccessor = httpContextAccessor;
     _mapper = mapper;
   }
-
   #endregion
 
   #region Public Methods
-
   public async Task<ServiceResult<UserDto>> LoginAsync(LoginDto loginDto)
   {
     var user = await _userManager.FindByEmailAsync(loginDto.Email);
@@ -104,6 +97,5 @@ public class IdentityService : IIdentityService
 
     return _mapper.Map<AppUserDto>(user);
   }
-
   #endregion
 }
